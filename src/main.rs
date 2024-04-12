@@ -14,7 +14,7 @@ use embassy_executor::Spawner;
 use embassy_time::{Duration, Timer};
 use esp_backtrace as _;
 use esp_hal::{
-    clock::ClockControl, embassy, gpio::{Gpio6, Gpio7, Output, PushPull, IO}, peripherals::Peripherals, prelude::*, rmt::{asynch::RxChannelAsync, PulseCode, Rmt, RxChannelConfig, RxChannelCreator, TxChannelConfig, TxChannelCreator}, timer::TimerGroup
+    clock::ClockControl, embassy, gpio::IO, peripherals::Peripherals, prelude::*, rmt::{asynch::RxChannelAsync, PulseCode, Rmt, RxChannelConfig, RxChannelCreator, TxChannelConfig, TxChannelCreator}, timer::TimerGroup
 };
 
 #[embassy_executor::task]
@@ -28,7 +28,7 @@ async fn run(mut rx_channel: esp_hal::rmt::Channel<2>) {
             length2: 1,
         }; 48];
 
-        let result = rx_channel.receive(&mut data).await;
+        let _result = rx_channel.receive(&mut data).await;
         esp_println::println!("Received: {:?}", data);
     }
 }
